@@ -1,0 +1,109 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test__task/view/newUI/appbar_title_widget.dart';
+import 'package:flutter_test__task/view/newUI/product_list_screen.dart';
+import 'package:provider/src/provider.dart';
+
+import '../../models/newmodel/cart_model.dart';
+import '../auth_widget.dart';
+
+
+class CartScreen extends StatelessWidget {
+  const CartScreen({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    var cart = context.watch<CartModel>();
+    return Scaffold(
+      body: CartBody(cart: cart),
+    );
+  }
+}
+
+class CartBody extends StatelessWidget {
+  const CartBody({
+    Key? key,
+    required this.cart,
+  }) : super(key: key);
+
+  final CartModel cart;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBarTitleWidget(
+        title: 'Wish Swish',
+        automaticallyImplyLeading: false,
+      ),
+      body: Column(
+        children: [
+          TotalPrice(
+            total: '${cart.totalPrice}',
+          ),
+          Expanded(
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                //shrinkWrap: true,
+                itemCount: cart.items.length,
+                itemBuilder: (context, index) {
+                  return CustomListItem(
+                    thumbnail: Image.asset(cart.items[index].thumbnail),
+                    title: '${cart.items[index].name} ',
+                    icon: const Icon(
+                      Icons.star,
+                      size: 18,
+                      color: Color(0xFFECB800),
+                    ),
+                    rate:
+                        '${double.parse(cart.items[index].rate.toStringAsFixed(1))}',
+                    price: '${cart.items[index].price} ₽',
+                    cart: IconButton(
+                      onPressed: () => cart.remove(cart.items[index]),
+                      icon: Image.asset(cart.items[index].iconRemove),
+                      iconSize: 40,
+                    ),
+                  );
+                }),
+          ),
+          ElevatedButtonWidget(child: 'Оплатить', onPressed: () {
+            cart.removeAll();
+            
+          }),
+        ],
+      ),
+    );
+  }
+}
+
+class TotalPrice extends StatelessWidget {
+  const TotalPrice({
+    Key? key,
+    required this.total,
+  }) : super(key: key);
+  final String total;
+  @override
+  Widget build(BuildContext context) {
+    const textStyle = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+    );
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Row(
+        children: [
+          const Expanded(
+            child: Text(
+              'Итого',
+              style: textStyle,
+            ),
+          ),
+          Text(
+            '$total ₽', //* ₽
+            style: textStyle,
+          ),
+        ],
+      ),
+    );
+  }
+}
