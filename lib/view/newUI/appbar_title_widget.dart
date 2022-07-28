@@ -73,15 +73,3 @@ class AppBarTitleWidget extends StatelessWidget with PreferredSizeWidget {
     );
   }
 }
-
-/* AppBar(
-      automaticallyImplyLeading: automaticallyImplyLeading,
-      backgroundColor: const Color(0xFF0C40A6),
-      title: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 16.0,
-        ),
-      ),
-    ); */

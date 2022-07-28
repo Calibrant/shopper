@@ -81,15 +81,13 @@ class PurchaseHistory extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        child:
-                            Text(cart.cloneItemsIds[index].name, 
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                )),
+                        child: Text(cart.cloneItemsIds[index].name,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            )),
                       ),
-                      Text(
-                          '${cart.cloneItemsIds[index].price}₽',
+                      Text('${cart.cloneItemsIds[index].price}₽',
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
