@@ -75,7 +75,12 @@ class AddButton extends StatelessWidget {
     );
 
     return IconButton(
-      onPressed: isInCart ? () => cart.remove(item) : () => cart.add(item),
+      onPressed: isInCart
+          ? () => cart.remove(item)
+          : () {
+              cart.add(item);
+             
+            },
       icon:
           isInCart ? Image.asset(item.iconRemove) : Image.asset(item.iconCart),
       iconSize: 40,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test__task/models/newmodel/catalog_model.dart';
+import 'package:flutter_test__task/models/product_model.dart';
 
 class CartModel extends ChangeNotifier {
   late CatalogModel _catalog;
-  //late HistoryModel historyModel;
   final List _itemIds = [];
+  List<Item> cloneItemsIds = [];
 
   CatalogModel get catalog => _catalog;
 
@@ -13,10 +14,14 @@ class CartModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  int totalPrice(List<Item> items) {
+    return items.fold(
+        0, (previousValue, element) => previousValue + element.price);
+  }
+
   List<Item> get items => _itemIds.map((id) => catalog.getById(id)).toList();
 
-  int get totalPrice =>
-      items.fold(0, (previousValue, element) => previousValue + element.price);
+  final order = ProductModel().random.nextInt(20000) + 10000;
 
   void add(Item item) {
     _itemIds.add(item.id);

@@ -9,7 +9,7 @@ class ProductModel {
   final double? rate;
   final int? price;
 
-  ProductModel({
+  ProductModel( {
     this.id,
     this.productGroupId,
     this.name,
@@ -27,6 +27,7 @@ class ProductModel {
 
 final rate = ProductModel().doubleInRange(ProductModel().random, 0, 5);
 const imageCart = 'assets/images/Frame 21.png';
+
 
 List product = <ProductModel>[
   ProductModel(

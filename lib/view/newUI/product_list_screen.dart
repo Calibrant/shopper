@@ -17,11 +17,6 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
-  /* Future refresh() async {
-    setState(() {
-      product;
-    });
-  } */
 
   @override
   Widget build(BuildContext context) {

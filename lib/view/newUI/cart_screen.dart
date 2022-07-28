@@ -2,6 +2,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_test__task/models/newmodel/profile_model.dart';
 import 'package:flutter_test__task/view/newUI/appbar_title_widget.dart';
 import 'package:flutter_test__task/view/newUI/product_list_screen.dart';
 import 'package:provider/src/provider.dart';
@@ -9,12 +10,13 @@ import 'package:provider/src/provider.dart';
 import '../../models/newmodel/cart_model.dart';
 import '../auth_widget.dart';
 
-
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
     var cart = context.watch<CartModel>();
+
     return Scaffold(
       body: CartBody(cart: cart),
     );
@@ -38,8 +40,9 @@ class CartBody extends StatelessWidget {
       ),
       body: Column(
         children: [
-          TotalPrice(
-            total: '${cart.totalPrice}',
+           TotalPrice(
+           // total: 'total',
+             total: '${cart.totalPrice(cart.items)}',
           ),
           Expanded(
             child: ListView.builder(
@@ -66,10 +69,12 @@ class CartBody extends StatelessWidget {
                   );
                 }),
           ),
-          ElevatedButtonWidget(child: 'Оплатить', onPressed: () {
-            cart.removeAll();
-            
-          }),
+          ElevatedButtonWidget(
+              child: 'Оплатить',
+              onPressed: () {
+               cart.cloneItemsIds = [...cart.items.toList()];
+                cart.removeAll();
+              }),
         ],
       ),
     );
