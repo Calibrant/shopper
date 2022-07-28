@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class AppBarTitleWidget extends StatelessWidget with PreferredSizeWidget {
   AppBarTitleWidget({
@@ -8,12 +9,72 @@ class AppBarTitleWidget extends StatelessWidget with PreferredSizeWidget {
     required this.automaticallyImplyLeading,
   }) : super(key: key);
   final String title;
- final bool automaticallyImplyLeading;
+  final bool automaticallyImplyLeading;
+
+  Future<String> internetConnect() async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    if (result == true) {
+      return title;
+    } else {
+      return 'Нет подключения';
+    }
+  }
+
   @override
   Size get preferredSize => const Size.fromHeight(64);
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return FutureBuilder<String>(
+      future: internetConnect(),
+      builder: ((context, snapshot) {
+        List<Widget> children;
+        if (snapshot.hasData) {
+          children = <Widget>[
+            AppBar(
+              automaticallyImplyLeading: automaticallyImplyLeading,
+              backgroundColor: const Color(0xFF0C40A6),
+              title: Text(
+                '${snapshot.data}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ];
+        } else if (snapshot.hasError) {
+          children = <Widget>[
+            const Icon(
+              Icons.error_outline,
+              color: Colors.red,
+              size: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Text('Error: ${snapshot.error}'),
+            )
+          ];
+        } else {
+          children = <Widget>[
+            const SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(),
+            ),
+          ];
+        }
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: children,
+          ),
+        );
+      }),
+    );
+  }
+}
+
+/* AppBar(
       automaticallyImplyLeading: automaticallyImplyLeading,
       backgroundColor: const Color(0xFF0C40A6),
       title: Text(
@@ -23,6 +84,4 @@ class AppBarTitleWidget extends StatelessWidget with PreferredSizeWidget {
           fontSize: 16.0,
         ),
       ),
-    );
-  }
-}
+    ); */

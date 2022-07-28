@@ -5,7 +5,14 @@ import 'package:flutter_test__task/models/product_model.dart';
 class CartModel extends ChangeNotifier {
   late CatalogModel _catalog;
   final List _itemIds = [];
-  List<Item> cloneItemsIds = [];
+  List<Item> _cloneItemsIds = [];
+
+  List<Item> get cloneItemsIds => _cloneItemsIds;
+
+  set cloneItemsIds(List<Item> newClone) {
+    _cloneItemsIds = newClone;
+    notifyListeners();
+  }
 
   CatalogModel get catalog => _catalog;
 
