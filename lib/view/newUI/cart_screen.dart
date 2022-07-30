@@ -7,6 +7,7 @@ import 'package:flutter_test__task/view/newUI/appbar_title_widget.dart';
 import 'package:flutter_test__task/view/newUI/product_list_screen.dart';
 import 'package:provider/src/provider.dart';
 
+import '../../generated/l10n.dart';
 import '../../models/newmodel/cart_model.dart';
 import '../auth_widget.dart';
 
@@ -35,7 +36,7 @@ class CartBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarTitleWidget(
-        title: 'Wish Swish',
+        title: S.of(context).appbar_title_WS,
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -68,7 +69,7 @@ class CartBody extends StatelessWidget {
                 }),
           ),
           ElevatedButtonWidget(
-              child: 'Оплатить',
+              child: S.of(context).button_pay,
               onPressed: () {
                cart.cloneItemsIds = [...cart.items.toList()];
                 cart.removeAll();
@@ -95,9 +96,9 @@ class TotalPrice extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Row(
         children: [
-          const Expanded(
+           Expanded(
             child: Text(
-              'Итого',
+              S.of(context).total_title,
               style: textStyle,
             ),
           ),

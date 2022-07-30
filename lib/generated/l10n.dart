@@ -49,6 +49,126 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Сделай жизнь проще`
+  String get logo_title {
+    return Intl.message(
+      'Сделай жизнь проще',
+      name: 'logo_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Электронная почта не может быть пустой`
+  String get email_empty {
+    return Intl.message(
+      'Электронная почта не может быть пустой',
+      name: 'email_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверный адрес электронной почты`
+  String get invalid_email {
+    return Intl.message(
+      'Неверный адрес электронной почты',
+      name: 'invalid_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Авторизация`
+  String get auth_title {
+    return Intl.message(
+      'Авторизация',
+      name: 'auth_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите email`
+  String get enter_email {
+    return Intl.message(
+      'Введите email',
+      name: 'enter_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите пароль`
+  String get enter_password {
+    return Intl.message(
+      'Введите пароль',
+      name: 'enter_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wish Swish`
+  String get appbar_title_WS {
+    return Intl.message(
+      'Wish Swish',
+      name: 'appbar_title_WS',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Каталог`
+  String get catalog_title {
+    return Intl.message(
+      'Каталог',
+      name: 'catalog_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Оплатить`
+  String get button_pay {
+    return Intl.message(
+      'Оплатить',
+      name: 'button_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Итого`
+  String get total_title {
+    return Intl.message(
+      'Итого',
+      name: 'total_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `История покупок`
+  String get purchasing_history_title {
+    return Intl.message(
+      'История покупок',
+      name: 'purchasing_history_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Заказ`
+  String get order_title {
+    return Intl.message(
+      'Заказ',
+      name: 'order_title',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -57,6 +177,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ru'),
     ];
   }
 

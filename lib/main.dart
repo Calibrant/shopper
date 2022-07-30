@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_test__task/generated/l10n.dart';
 import 'package:flutter_test__task/models/product_model.dart';
 import 'package:flutter_test__task/view/login.dart';
 import 'package:flutter_test__task/view/newUI/bottom_navigation_bar_screen.dart';
@@ -42,10 +44,17 @@ class App extends StatelessWidget {
             }),
       ],
       child: MaterialApp(
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
         initialRoute: '/',
         routes: {
           '/': (context) => const LoginScreen(),
-          '/group_catalog': (context) =>BottomNavBarScreen(),
+          '/group_catalog': (context) => BottomNavBarScreen(),
           '/catalog': (context) => const CatalogScreen(),
           /* '/cart': (context) => const CartScreen(),
           '/profile': (context) => const ProfileScreen(), */

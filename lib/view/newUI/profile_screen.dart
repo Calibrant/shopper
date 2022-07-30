@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
+import '../../generated/l10n.dart';
 import '../../models/newmodel/cart_model.dart';
 import '../../models/newmodel/profile_model.dart';
 
@@ -23,7 +24,8 @@ class ProfileScreen extends StatelessWidget {
           children: [
             PhotoProfile(user: user),
             const SizedBox(height: 40.0),
-            const Text('История покупок', style: TextStyle(fontSize: 18)),
+            Text(S.of(context).purchasing_history_title,
+                style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 20.0),
             PurchaseHistory(profile: user, cart: cart),
             const SizedBox(height: 20.0),
@@ -45,8 +47,6 @@ class PurchaseHistory extends StatelessWidget {
 
   final CartModel cart;
 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,9 +59,9 @@ class PurchaseHistory extends StatelessWidget {
             children: [
               Expanded(
                 child: cart.cloneItemsIds.isEmpty
-                    ? const Text('Заказ №0',
+                    ?  Text('${S.of(context).order_title} №0',
                         style: CustomTextStyle.profileOfTextStyle)
-                    : Text('Заказ №${cart.orderNumber(cart.cloneItemsIds)}',
+                    : Text('${S.of(context).order_title} №${cart.orderNumber(cart.cloneItemsIds)}',
                         style: CustomTextStyle.profileOfTextStyle),
               ),
               Text('${cart.totalPrice(cart.cloneItemsIds)} ₽',
@@ -131,9 +131,7 @@ class PhotoProfile extends StatelessWidget {
   }
 }
 
- class CustomTextStyle{
-  static const TextStyle profileOfTextStyle = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w500
-  );
- }
+class CustomTextStyle {
+  static const TextStyle profileOfTextStyle =
+      TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
+}

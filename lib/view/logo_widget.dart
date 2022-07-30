@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class LogoWidget extends StatelessWidget {
   const LogoWidget({
     Key? key,
@@ -17,9 +19,9 @@ class LogoWidget extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          const Text(
-            'Сделай жизнь проще',
-            style: TextStyle(
+          Text(
+            S.of(context).logo_title,
+            style: const TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.w500,
               color: Color(0xff232323),

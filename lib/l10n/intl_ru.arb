@@ -8,7 +8,5 @@
     "appbar_title_WS" : "Wish Swish",
     "catalog_title": "Каталог",
     "button_pay":"Оплатить",
-    "total_title":"Итого",
-    "purchasing_history_title":"История покупок",
-    "order_title":"Заказ"
+    "total_title":"Итого"
 }

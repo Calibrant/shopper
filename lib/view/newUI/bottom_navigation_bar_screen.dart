@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_test__task/generated/l10n.dart';
 import 'package:flutter_test__task/view/newUI/cart_screen.dart';
 import 'package:flutter_test__task/view/newUI/profile_screen.dart';
 import 'package:provider/provider.dart';
+
 import '../../models/newmodel/button_navbar_provider.dart';
 import '../../models/newmodel/product_group_model.dart';
 
@@ -88,20 +90,20 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarTitleWidget(
-        title: 'Wish Swish',
+        title: S.of(context).appbar_title_WS,
         automaticallyImplyLeading: false,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(
+           Padding(
+            padding:const EdgeInsets.symmetric(
               vertical: 24.0,
               horizontal: 20.0,
             ),
             child: Text(
-              'Каталог',
-              style: TextStyle(
+              S.of(context).catalog_title,
+              style:const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),

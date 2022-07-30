@@ -3,6 +3,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
+import '../generated/l10n.dart';
 import '../models/newmodel/profile_model.dart';
 
 class AuthWidget extends StatefulWidget {
@@ -51,11 +52,11 @@ class _AuthWidgetState extends State<AuthWidget> {
   void validateEmail(String val) {
     if (val.isEmpty) {
       setState(() {
-        _errorMessage = "Электронная почта не может быть пустой";
+        _errorMessage = S.of(context).email_empty;
       });
     } else if (!EmailValidator.validate(val, false)) {
       setState(() {
-        _errorMessage = "Неверный адрес электронной почты";
+        _errorMessage = S.of(context).invalid_email;
       });
     } else {
       setState(() {
@@ -77,7 +78,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                 _formKeyPass.currentState!.validate() &&
                 isValidateEmail) {
               modelProfile.add(profile);
-               Navigator.pushNamed(context, '/group_catalog');
+              Navigator.pushNamed(context, '/group_catalog');
             }
           }
         : null;
@@ -90,9 +91,9 @@ class _AuthWidgetState extends State<AuthWidget> {
             const SizedBox(
               height: 75,
             ),
-            const Text(
-              'Авторизация',
-              style: TextStyle(
+            Text(
+              S.of(context).auth_title,
+              style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.w500,
                 color: Color(0xff363636),
@@ -133,9 +134,9 @@ class _AuthWidgetState extends State<AuthWidget> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),
           ),
-          label: const Text(
-            'Введите email',
-            style: TextStyle(
+          label: Text(
+            S.of(context).enter_email,
+            style: const TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.w400,
               color: Color(0xffABABAB),
@@ -159,9 +160,9 @@ class _AuthWidgetState extends State<AuthWidget> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),
           ),
-          label: const Text(
-            'Введите пароль',
-            style: TextStyle(
+          label: Text(
+            S.of(context).enter_password,
+            style: const TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.w400,
               color: Color(0xffABABAB),
