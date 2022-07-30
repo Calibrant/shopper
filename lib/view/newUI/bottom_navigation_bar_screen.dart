@@ -60,8 +60,29 @@ class BottomNavBarScreen extends StatelessWidget {
   }
 }
 
-class HomeBodyWidget extends StatelessWidget {
+class HomeBodyWidget extends StatefulWidget {
   const HomeBodyWidget({Key? key}) : super(key: key);
+
+  @override
+  State<HomeBodyWidget> createState() => _HomeBodyWidgetState();
+}
+
+class _HomeBodyWidgetState extends State<HomeBodyWidget> {
+  @override
+  void initState() {
+    super.initState();
+    isProgress = true;
+  }
+
+  bool isProgress = false;
+
+  Future<List<ProductGroupModel>> _getItems() async {
+    if (isProgress) {
+      return Future.delayed(const Duration(milliseconds: 500), () => productGroup);
+    } else {
+      return productGroup;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,19 +112,31 @@ class HomeBodyWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: 20.0,
               ),
-              child: GridView.builder(
-                itemCount: productGroup.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20.0,
-                ),
-                itemBuilder: (context, index) => ProductGroupWidget(
-                  productGroup: productGroup[index],
-                  press: () => Navigator.pushNamed(context, '/catalog',
-                      arguments: CatalogScreen(
-                          productGroup: productGroup.elementAt(index))),
-                ),
-              ),
+              child: FutureBuilder<List<ProductGroupModel>>(
+                  future: _getItems(),
+                  builder: (context, snapshot) {
+                    if (snapshot.data == null) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return GridView.builder(
+                          itemCount: snapshot.data!.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 20.0,
+                          ),
+                          itemBuilder: (context, index) {
+                            return ProductGroupWidget(
+                              productGroup: snapshot.data![index],
+                              press: () => Navigator.pushNamed(
+                                  context, '/catalog',
+                                  arguments: CatalogScreen(
+                                      productGroup:
+                                          snapshot.data!.elementAt(index))),
+                            );
+                          });
+                    }
+                  }),
             ),
           ),
         ],

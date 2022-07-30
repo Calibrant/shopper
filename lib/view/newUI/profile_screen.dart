@@ -1,8 +1,6 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
-
 import '../../models/newmodel/cart_model.dart';
 import '../../models/newmodel/profile_model.dart';
 
@@ -47,6 +45,8 @@ class PurchaseHistory extends StatelessWidget {
 
   final CartModel cart;
 
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,11 +58,11 @@ class PurchaseHistory extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Text('Заказ №${cart.order}',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    )),
+                child: cart.cloneItemsIds.isEmpty
+                    ? const Text('Заказ №0',
+                        style: CustomTextStyle.profileOfTextStyle)
+                    : Text('Заказ №${cart.orderNumber(cart.cloneItemsIds)}',
+                        style: CustomTextStyle.profileOfTextStyle),
               ),
               Text('${cart.totalPrice(cart.cloneItemsIds)} ₽',
                   style: const TextStyle(
@@ -130,3 +130,10 @@ class PhotoProfile extends StatelessWidget {
     );
   }
 }
+
+ class CustomTextStyle{
+  static const TextStyle profileOfTextStyle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500
+  );
+ }

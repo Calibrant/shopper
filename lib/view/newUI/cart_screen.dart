@@ -41,13 +41,11 @@ class CartBody extends StatelessWidget {
       body: Column(
         children: [
            TotalPrice(
-           // total: 'total',
              total: '${cart.totalPrice(cart.items)}',
           ),
           Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
-                //shrinkWrap: true,
                 itemCount: cart.items.length,
                 itemBuilder: (context, index) {
                   return CustomListItem(

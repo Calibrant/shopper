@@ -59,7 +59,10 @@ class AppBarTitleWidget extends StatelessWidget with PreferredSizeWidget {
             const SizedBox(
               width: 20,
               height: 20,
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Color(0xFF0C40A6),
+                strokeWidth: 2,
+              ),
             ),
           ];
         }

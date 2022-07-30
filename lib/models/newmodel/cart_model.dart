@@ -28,7 +28,9 @@ class CartModel extends ChangeNotifier {
 
   List<Item> get items => _itemIds.map((id) => catalog.getById(id)).toList();
 
-  final order = ProductModel().random.nextInt(20000) + 10000;
+  int orderNumber(List<Item> items){
+    return items.first.orderNumber;
+  }
 
   void add(Item item) {
     _itemIds.add(item.id);

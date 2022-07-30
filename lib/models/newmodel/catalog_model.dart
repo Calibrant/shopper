@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_test__task/models/product_model.dart';
 
 class CatalogModel {
   List productNames = [
@@ -60,6 +61,7 @@ class CatalogModel {
         thumbnail: productThumbnail[id % productThumbnail.length],
         iconCart: iconCart,
         iconRemove: iconRemove,
+        orderNumber: ProductModel().random.nextInt(20000) + 10000,
       );
 
   Item getByPosition(int position) {
@@ -75,6 +77,7 @@ class Item {
   final String thumbnail;
   final String iconCart;
   final String iconRemove;
+  final int orderNumber;
 
   Item({
     required this.id,
@@ -84,6 +87,7 @@ class Item {
     required this.thumbnail,
     required this.iconCart,
     required this.iconRemove,
+    required this.orderNumber,
   });
 
   Item copyWith({
@@ -94,6 +98,7 @@ class Item {
     String? thumbnail,
     String? iconCart,
     String? iconRemove,
+    int? orderNumber,
   }) {
     return Item(
       id: id ?? this.id,
@@ -103,16 +108,15 @@ class Item {
       thumbnail: thumbnail ?? this.thumbnail,
       iconCart: iconCart ?? this.iconCart,
       iconRemove: iconRemove ?? this.iconRemove,
+      orderNumber: orderNumber ?? this.orderNumber,
     );
   }
 
   @override
   bool operator ==(covariant Item other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id;
 
+    return other.id == id;
   }
 
   @override

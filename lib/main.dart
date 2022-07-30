@@ -45,10 +45,10 @@ class App extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const LoginScreen(),
-          '/group_catalog': (context) => BottomNavBarScreen(),
+          '/group_catalog': (context) =>BottomNavBarScreen(),
           '/catalog': (context) => const CatalogScreen(),
-          '/cart': (context) => const CartScreen(),
-          '/profile': (context) => const ProfileScreen(),
+          /* '/cart': (context) => const CartScreen(),
+          '/profile': (context) => const ProfileScreen(), */
         },
       ),
     );

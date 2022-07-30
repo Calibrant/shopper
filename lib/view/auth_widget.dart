@@ -67,18 +67,17 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     var modelProfile = context.read<ProfileModel>();
-    var profile = context.select<AuthModel,Profile>(
-      (user) => user.getByPosition(1));
+    var profile =
+        context.select<AuthModel, Profile>((user) => user.getByPosition(1));
 
     final onPressed = submitEmail && submitPass && isValidateEmail
         ? () {
             if (_formKeyEmail.currentState!.validate() &&
                 _formKeyPass.currentState!.validate() &&
                 isValidateEmail) {
-               modelProfile.add(profile);
-              Navigator.pushNamed(context, '/group_catalog');
+              modelProfile.add(profile);
+               Navigator.pushNamed(context, '/group_catalog');
             }
           }
         : null;
