@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'models/newmodel/button_navbar_provider.dart';
 import 'models/newmodel/cart_model.dart';
 import 'models/newmodel/catalog_model.dart';
+import 'models/newmodel/empty_cart_provider.dart';
 import 'models/newmodel/profile_model.dart';
 import 'view/newUI/catalog_screen.dart';
 
@@ -30,6 +31,7 @@ class App extends StatelessWidget {
         Provider(create: (context) => CatalogModel()),
         Provider(create: (context) => AuthModel()),
         Provider(create: (context) => ProductModel()),
+        ChangeNotifierProvider<EmptyCart>(create: (context) => EmptyCart()),
         ChangeNotifierProxyProvider<CatalogModel, CartModel>(
             create: (context) => CartModel(),
             update: (context, catalog, cart) {

@@ -9,15 +9,14 @@ import 'package:provider/src/provider.dart';
 
 import '../../generated/l10n.dart';
 import '../../models/newmodel/cart_model.dart';
+import '../../models/newmodel/empty_cart_provider.dart';
 import '../auth_widget.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
     var cart = context.watch<CartModel>();
-
     return Scaffold(
       body: CartBody(cart: cart),
     );
@@ -34,16 +33,20 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isCart = context.read<EmptyCart>();
     return Scaffold(
       appBar: AppBarTitleWidget(
         title: S.of(context).appbar_title_WS,
         automaticallyImplyLeading: false,
       ),
-      body: Column(
+      body:
+      isCart.isEmptyCart ?
+       Column(
         children: [
-           /* TotalPrice(
+          /* TotalPrice(
              total: '${cart.totalPrice(cart.items)}',
           ), */
+           
           Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
@@ -66,22 +69,31 @@ class CartBody extends StatelessWidget {
                     ),
                   );
                 }),
-          ),
+          ) 
+          ,
           ConstrainedBox(
-            constraints: const BoxConstraints.tightFor(width: 375.0, height: 56.0),
+            constraints:
+                const BoxConstraints.tightFor(width: 375.0, height: 56.0),
             child: ElevatedButton(
-                child:Text( S.of(context).button_pay),
+                child: Text(S.of(context).button_pay),
                 onPressed: () {
-                 cart.cloneItemsIds = [...cart.items.toList()];
+                  cart.cloneItemsIds = [...cart.items.toList()];
+                  isCart.isEmptyCart=false;
                   cart.removeAll();
                 }),
           ),
         ],
-      ),
+      )
+      :
+      const Center(child:  Text('Корзина пуста'),),
+      
     );
   }
 }
 
+
+
+//! позже удалить
 class TotalPrice extends StatelessWidget {
   const TotalPrice({
     Key? key,
@@ -98,7 +110,7 @@ class TotalPrice extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Row(
         children: [
-           Expanded(
+          Expanded(
             child: Text(
               S.of(context).total_title,
               style: textStyle,

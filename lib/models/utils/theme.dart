@@ -69,6 +69,7 @@ final kLightTheme = ThemeData(colorScheme: ColorScheme.fromSwatch()).copyWith(
     selectedIconTheme: IconThemeData(size: 30),
   ),
   iconTheme: const IconThemeData(
+    size: 18,
     color: Color(0xFFECB800),
   ),
 );

@@ -20,12 +20,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // product.sort((p1, p2) => p1.price!.compareTo(p2.price!.toInt()));
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('${widget.productGroup!.title}'),
-          backgroundColor: const Color(0xFF0C40A6),
         ),
         body: ListView.builder(
             itemCount: product.length,
@@ -35,8 +33,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 title: '${product.elementAt(index).name} ',
                 icon: const Icon(
                   Icons.star,
-                  size: 18,
-                  color: Color(0xFFECB800),
                 ),
                 rate:
                     '${double.parse(product[index].rate!.toStringAsFixed(1))}',
@@ -81,7 +77,6 @@ class CustomListItem extends StatelessWidget {
               aspectRatio: 1.0,
               child: thumbnail,
             ),
-            //  ),
             Expanded(
               child: TitleIconRateAndPriceGroupWidget(
                 title: title,
@@ -119,29 +114,24 @@ class TitleIconRateAndPriceGroupWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            // flex: 3,
             child: Row(
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                      fontSize: 16.0, fontWeight: FontWeight.w400),
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
                 icon,
                 Text(
                   rate,
-                  style: const TextStyle(
-                      fontSize: 16.0, fontWeight: FontWeight.w400),
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
               ],
             ),
           ),
           Expanded(
-            // flex: 2,
             child: Text(
               price,
-              style:
-                  const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+              style:Theme.of(context).textTheme.bodyText1,
             ),
           ),
         ],

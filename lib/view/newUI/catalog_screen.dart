@@ -2,11 +2,13 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_test__task/view/newUI/cart_screen.dart';
 import 'package:flutter_test__task/view/newUI/product_list_screen.dart';
 import 'package:provider/src/provider.dart';
 
 import '../../models/newmodel/cart_model.dart';
 import '../../models/newmodel/catalog_model.dart';
+import '../../models/newmodel/empty_cart_provider.dart';
 import '../../models/newmodel/product_group_model.dart';
 import 'appbar_title_widget.dart';
 
@@ -51,7 +53,6 @@ class ListItem extends StatelessWidget {
       title: '${item.name} ',
       icon: const Icon(
         Icons.star,
-        size: 18,
       ),
       rate: '${double.parse(item.rate.toStringAsFixed(1))}',
       price: '${item.price} ₽',
@@ -68,6 +69,7 @@ class AddButton extends StatelessWidget {
   final Item item;
   @override
   Widget build(BuildContext context) {
+    var isEmpty = context.read<EmptyCart>();
     var cart = context.read<CartModel>();
     var isInCart = context.select<CartModel, bool>(
       (cart) => cart.items.contains(item),
@@ -78,6 +80,7 @@ class AddButton extends StatelessWidget {
           ? () => cart.remove(item)
           : () {
               cart.add(item);
+              isEmpty.isEmptyCart=true;
             },
       icon:
           isInCart ? Image.asset(item.iconRemove) : Image.asset(item.iconCart),
