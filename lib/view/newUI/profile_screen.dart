@@ -65,10 +65,7 @@ class PurchaseHistory extends StatelessWidget {
                         style: CustomTextStyle.profileOfTextStyle),
               ),
               Text('${cart.totalPrice(cart.cloneItemsIds)} ₽',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  )),
+                  style: Theme.of(context).textTheme.bodyText1),
             ],
           ),
           ListView.builder(
@@ -82,16 +79,10 @@ class PurchaseHistory extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(cart.cloneItemsIds[index].name,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            )),
+                            style: Theme.of(context).textTheme.subtitle1),
                       ),
                       Text('${cart.cloneItemsIds[index].price}₽',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          )),
+                          style: Theme.of(context).textTheme.subtitle1),
                     ],
                   ),
                 );
@@ -120,11 +111,7 @@ class PhotoProfile extends StatelessWidget {
           '${user.elementAt(0).firstName}'
           '\n'
           '${user.elementAt(0).secondName}',
-          style: const TextStyle(
-            color: Color(0xff1F1F1F),
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       ],
     );

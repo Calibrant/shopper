@@ -52,7 +52,6 @@ class ListItem extends StatelessWidget {
       icon: const Icon(
         Icons.star,
         size: 18,
-        color: Color(0xFFECB800),
       ),
       rate: '${double.parse(item.rate.toStringAsFixed(1))}',
       price: '${item.price} ₽',
@@ -79,7 +78,6 @@ class AddButton extends StatelessWidget {
           ? () => cart.remove(item)
           : () {
               cart.add(item);
-             
             },
       icon:
           isInCart ? Image.asset(item.iconRemove) : Image.asset(item.iconCart),

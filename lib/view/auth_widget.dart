@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test__task/models/utils/theme.dart';
 import 'package:provider/src/provider.dart';
 
 import '../generated/l10n.dart';
@@ -93,11 +94,7 @@ class _AuthWidgetState extends State<AuthWidget> {
             ),
             Text(
               S.of(context).auth_title,
-              style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.w500,
-                color: Color(0xff363636),
-              ),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             Text(
               _errorMessage,
@@ -115,6 +112,7 @@ class _AuthWidgetState extends State<AuthWidget> {
               height: 20.0,
             ),
             ElevatedButtonWidget(
+              isValidateEmail: isValidateEmail,
               child: 'Войти',
               onPressed: onPressed,
             ),
@@ -128,21 +126,15 @@ class _AuthWidgetState extends State<AuthWidget> {
     return Form(
       key: _formKeyEmail,
       child: TextFormField(
+        enabled: true,
         controller: emailController,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
           label: Text(
             S.of(context).enter_email,
-            style: const TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.w400,
-              color: Color(0xffABABAB),
-            ),
           ),
         ),
+        style: Theme.of(context).textTheme.bodyText2,
         onChanged: (val) {
           validateEmail(val);
         },
@@ -157,18 +149,11 @@ class _AuthWidgetState extends State<AuthWidget> {
         controller: passwordController,
         keyboardType: TextInputType.visiblePassword,
         decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
           label: Text(
             S.of(context).enter_password,
-            style: const TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.w400,
-              color: Color(0xffABABAB),
-            ),
           ),
         ),
+        style: Theme.of(context).textTheme.bodyText2,
       ),
     );
   }
@@ -179,27 +164,24 @@ class ElevatedButtonWidget extends StatelessWidget {
     Key? key,
     required this.child,
     required this.onPressed,
+    required this.isValidateEmail,
   }) : super(key: key);
   final String child;
   final VoidCallback? onPressed;
+  final bool isValidateEmail;
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints.tightFor(width: 375.0, height: 56.0),
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-            const Color(0xff0C40A6),
-          ),
+          backgroundColor: isValidateEmail
+              ? MaterialStateProperty.all(const Color(0xff0C40A6))
+              : MaterialStateProperty.all(Colors.black.withOpacity(0.05)),
         ),
         onPressed: onPressed,
         child: Text(
           child,
-          style: const TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            color: Color(0xffFFFFFF),
-          ),
         ),
       ),
     );

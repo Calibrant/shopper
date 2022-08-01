@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_test__task/models/utils/theme.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class AppBarTitleWidget extends StatelessWidget with PreferredSizeWidget {
@@ -32,7 +33,7 @@ class AppBarTitleWidget extends StatelessWidget with PreferredSizeWidget {
           children = <Widget>[
             AppBar(
               automaticallyImplyLeading: automaticallyImplyLeading,
-              backgroundColor: const Color(0xFF0C40A6),
+             // backgroundColor: const Color(0xFF0C40A6),
               title: Text(
                 '${snapshot.data}',
                 style: const TextStyle(

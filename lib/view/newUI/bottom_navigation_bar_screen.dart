@@ -25,34 +25,26 @@ class BottomNavBarScreen extends StatelessWidget {
     var navbar = Provider.of<ButtonNavBarProvider>(context);
 
     return Scaffold(
-      /* appBar: AppBarTitleWidget(
-        title: 'Wish Swish',
-        automaticallyImplyLeading: false,
-      ), */
       body: _widgetBuildBody.elementAt(navbar.currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navbar.currentIndex,
-        selectedItemColor: const Color(0xFF0C40A6),
         onTap: (index) => navbar.currentIndex = index,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              size: 30,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.shopping_bag_outlined,
-              size: 30,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person_outline,
-              size: 30,
             ),
             label: '',
           ),
@@ -103,10 +95,7 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
             ),
             child: Text(
               S.of(context).catalog_title,
-              style:const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
+              style:Theme.of(context).textTheme.bodyText1,
             ),
           ),
           Expanded(
@@ -176,11 +165,7 @@ class ProductGroupWidget extends StatelessWidget {
                     children: [
                       Text(
                         '${productGroup!.title}',
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff212121),
-                        ),
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text('${productGroup!.sum} шт.'),
                     ],

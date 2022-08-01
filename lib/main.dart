@@ -1,7 +1,9 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test__task/generated/l10n.dart';
 import 'package:flutter_test__task/models/product_model.dart';
+import 'package:flutter_test__task/models/utils/theme.dart';
 import 'package:flutter_test__task/view/login.dart';
 import 'package:flutter_test__task/view/newUI/bottom_navigation_bar_screen.dart';
 import 'package:flutter_test__task/view/newUI/cart_screen.dart';
@@ -15,10 +17,12 @@ import 'view/newUI/catalog_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -43,22 +47,29 @@ class App extends StatelessWidget {
               return profile;
             }),
       ],
-      child: MaterialApp(
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const LoginScreen(),
-          '/group_catalog': (context) => BottomNavBarScreen(),
-          '/catalog': (context) => const CatalogScreen(),
-          /* '/cart': (context) => const CartScreen(),
-          '/profile': (context) => const ProfileScreen(), */
-        },
+      child: AdaptiveTheme(
+        light: kLightTheme,
+        dark: kDarkTheme,
+        initial: AdaptiveThemeMode.light,
+        builder: (light, dark) => MaterialApp(
+          theme: light,
+          darkTheme: dark,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const LoginScreen(),
+            '/group_catalog': (context) => BottomNavBarScreen(),
+            '/catalog': (context) => const CatalogScreen(),
+            /* '/cart': (context) => const CartScreen(),
+            '/profile': (context) => const ProfileScreen(), */
+          },
+        ),
       ),
     );
   }

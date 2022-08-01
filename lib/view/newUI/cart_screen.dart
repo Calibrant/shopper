@@ -41,9 +41,9 @@ class CartBody extends StatelessWidget {
       ),
       body: Column(
         children: [
-           TotalPrice(
+           /* TotalPrice(
              total: '${cart.totalPrice(cart.items)}',
-          ),
+          ), */
           Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
@@ -55,7 +55,6 @@ class CartBody extends StatelessWidget {
                     icon: const Icon(
                       Icons.star,
                       size: 18,
-                      color: Color(0xFFECB800),
                     ),
                     rate:
                         '${double.parse(cart.items[index].rate.toStringAsFixed(1))}',
@@ -68,12 +67,15 @@ class CartBody extends StatelessWidget {
                   );
                 }),
           ),
-          ElevatedButtonWidget(
-              child: S.of(context).button_pay,
-              onPressed: () {
-               cart.cloneItemsIds = [...cart.items.toList()];
-                cart.removeAll();
-              }),
+          ConstrainedBox(
+            constraints: const BoxConstraints.tightFor(width: 375.0, height: 56.0),
+            child: ElevatedButton(
+                child:Text( S.of(context).button_pay),
+                onPressed: () {
+                 cart.cloneItemsIds = [...cart.items.toList()];
+                  cart.removeAll();
+                }),
+          ),
         ],
       ),
     );
