@@ -1,16 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_test__task/models/newmodel/profile_model.dart';
+// ignore: implementation_imports
+import 'package:provider/src/provider.dart';
+
 import 'package:flutter_test__task/view/newUI/appbar_title_widget.dart';
 import 'package:flutter_test__task/view/newUI/product_list_screen.dart';
-import 'package:provider/src/provider.dart';
 
 import '../../generated/l10n.dart';
 import '../../models/newmodel/cart_model.dart';
 import '../../models/newmodel/empty_cart_provider.dart';
-import '../auth_widget.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);

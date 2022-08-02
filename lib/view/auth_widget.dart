@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test__task/models/utils/theme.dart';
+// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
 import '../generated/l10n.dart';

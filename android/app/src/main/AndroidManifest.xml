@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_test__task">
+   package="com.example.flutter_test__task">
    <application
         android:label="flutter_test__task"
         android:name="${applicationName}"

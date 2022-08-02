@@ -1,5 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 import '../../generated/l10n.dart';
 import '../../models/newmodel/cart_model.dart';

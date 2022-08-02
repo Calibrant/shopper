@@ -1,9 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_test__task/view/newUI/cart_screen.dart';
 import 'package:flutter_test__task/view/newUI/product_list_screen.dart';
+// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
 import '../../models/newmodel/cart_model.dart';
@@ -39,6 +38,7 @@ class CatalogScreen extends StatelessWidget {
 
 class ListItem extends StatelessWidget {
   final int index;
+  // ignore: use_key_in_widget_constructors
   const ListItem(
     this.index,
   );
@@ -65,7 +65,7 @@ class AddButton extends StatelessWidget {
   const AddButton({
     Key? key,
     required this.item,
-  });
+  }): super(key: key);
   final Item item;
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class AddButton extends StatelessWidget {
           ? () => cart.remove(item)
           : () {
               cart.add(item);
-              isEmpty.isEmptyCart=true;
+              isEmpty.isEmptyCart = true;
             },
       icon:
           isInCart ? Image.asset(item.iconRemove) : Image.asset(item.iconCart),
