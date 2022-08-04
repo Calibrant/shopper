@@ -9,4 +9,6 @@
     "catalog_title": "Каталог",
     "button_pay":"Оплатить",
     "total_title":"Итого"
+    "purchasing_history_title":"История покупок",
+    "order_title":"Заказ №"
 }

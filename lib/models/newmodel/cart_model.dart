@@ -13,6 +13,15 @@ class CartModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<Item> _listArray = [];
+
+  // ignore: unnecessary_getters_setters
+  List<Item> get listArray => _listArray;
+
+  set listArray(List<Item> newListArray) {
+    _listArray = newListArray;
+  }
+
   CatalogModel get catalog => _catalog;
 
   set catalog(CatalogModel newCatalog) {
@@ -27,7 +36,7 @@ class CartModel extends ChangeNotifier {
 
   List<Item> get items => _itemIds.map((id) => catalog.getById(id)).toList();
 
-  int orderNumber(List<Item> items){
+  int orderNumber(List<Item> items) {
     return items.first.orderNumber;
   }
 

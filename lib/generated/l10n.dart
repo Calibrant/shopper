@@ -163,7 +163,7 @@ class S {
   /// `Заказ`
   String get order_title {
     return Intl.message(
-      'Заказ',
+      'Заказ №',
       name: 'order_title',
       desc: '',
       args: [],

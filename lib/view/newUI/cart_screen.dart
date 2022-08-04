@@ -38,59 +38,56 @@ class CartBody extends StatelessWidget {
         title: S.of(context).appbar_title_WS,
         automaticallyImplyLeading: false,
       ),
-      body:
-      isCart.isEmptyCart ?
-       Column(
-        children: [
-          /* TotalPrice(
+      body: isCart.isEmptyCart
+          ? Column(
+              children: [
+                /* TotalPrice(
              total: '${cart.totalPrice(cart.items)}',
           ), */
-           
-          Expanded(
-            child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: cart.items.length,
-                itemBuilder: (context, index) {
-                  return CustomListItem(
-                    thumbnail: Image.asset(cart.items[index].thumbnail),
-                    title: '${cart.items[index].name} ',
-                    icon: const Icon(
-                      Icons.star,
-                      size: 18,
-                    ),
-                    rate:
-                        '${double.parse(cart.items[index].rate.toStringAsFixed(1))}',
-                    price: '${cart.items[index].price} ₽',
-                    cart: IconButton(
-                      onPressed: () => cart.remove(cart.items[index]),
-                      icon: Image.asset(cart.items[index].iconRemove),
-                      iconSize: 40,
-                    ),
-                  );
-                }),
-          ) 
-          ,
-          ConstrainedBox(
-            constraints:
-                const BoxConstraints.tightFor(width: 375.0, height: 56.0),
-            child: ElevatedButton(
-                child: Text(S.of(context).button_pay),
-                onPressed: () {
-                  cart.cloneItemsIds = [...cart.items.toList()];
-                  isCart.isEmptyCart=false;
-                  cart.removeAll();
-                }),
-          ),
-        ],
-      )
-      :
-      const Center(child:  Text('Корзина пуста'),),
-      
+
+                Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: cart.items.length,
+                      itemBuilder: (context, index) {
+                        return CustomListItem(
+                          thumbnail: Image.asset(cart.items[index].thumbnail),
+                          title: '${cart.items[index].name} ',
+                          icon: const Icon(
+                            Icons.star,
+                            size: 18,
+                          ),
+                          rate:
+                              '${double.parse(cart.items[index].rate.toStringAsFixed(1))}',
+                          price: '${cart.items[index].price} ₽',
+                          cart: IconButton(
+                            onPressed: () => cart.remove(cart.items[index]),
+                            icon: Image.asset(cart.items[index].iconRemove),
+                            iconSize: 40,
+                          ),
+                        );
+                      }),
+                ),
+                ConstrainedBox(
+                  constraints:
+                      const BoxConstraints.tightFor(width: 375.0, height: 56.0),
+                  child: ElevatedButton(
+                      child: Text(S.of(context).button_pay),
+                      onPressed: () {
+                        cart.cloneItemsIds.addAll(cart.items.toList());
+                        cart.items.clear();
+                        isCart.isEmptyCart = false;
+                        cart.removeAll();
+                      }),
+                ),
+              ],
+            )
+          : const Center(
+              child: Text('Корзина пуста'),
+            ),
     );
   }
 }
-
-
 
 //! позже удалить
 class TotalPrice extends StatelessWidget {

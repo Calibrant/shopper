@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test__task/view/newUI/product_list_screen.dart';
 // ignore: implementation_imports
@@ -11,27 +10,47 @@ import '../../models/newmodel/empty_cart_provider.dart';
 import '../../models/newmodel/product_group_model.dart';
 import 'appbar_title_widget.dart';
 
-class CatalogScreen extends StatelessWidget {
+class CatalogScreen extends StatefulWidget {
   final ProductGroupModel? productGroup;
 
   const CatalogScreen({Key? key, this.productGroup}) : super(key: key);
 
   @override
+  State<CatalogScreen> createState() => _CatalogScreenState();
+}
+
+class _CatalogScreenState extends State<CatalogScreen> {
+  @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as CatalogScreen;
     var catalog = context.read<CatalogModel>();
+    void updateCatalogProductNames() {
+      catalog.productNames.length;
+      setState(() {});
+    }
+
     return Scaffold(
       appBar: AppBarTitleWidget(
         title: '${args.productGroup?.title}',
         automaticallyImplyLeading: true,
       ),
-      body: ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: catalog.productNames.length,
-          itemBuilder: (context, index) {
-            return ListItem(index);
-          }),
+      body: RefreshIndicator(
+        color: Colors.white,
+        backgroundColor: const Color(0xFF0C40A6),
+        onRefresh: () async {
+          await Future.delayed(
+            const Duration(seconds: 1),
+          );
+          updateCatalogProductNames();
+        },
+        child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: catalog.productNames.length,
+            itemBuilder: (context, index) {
+              return ListItem(index);
+            }),
+      ),
     );
   }
 }
@@ -48,6 +67,7 @@ class ListItem extends StatelessWidget {
     var item = context.select<CatalogModel, Item>(
       (catalog) => catalog.getByPosition(index),
     );
+
     return CustomListItem(
       thumbnail: Image.asset(item.thumbnail),
       title: '${item.name} ',
@@ -65,7 +85,7 @@ class AddButton extends StatelessWidget {
   const AddButton({
     Key? key,
     required this.item,
-  }): super(key: key);
+  }) : super(key: key);
   final Item item;
   @override
   Widget build(BuildContext context) {

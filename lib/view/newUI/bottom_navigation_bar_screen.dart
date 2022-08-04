@@ -72,7 +72,8 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
 
   Future<List<ProductGroupModel>> _getItems() async {
     if (isProgress) {
-      return Future.delayed(const Duration(milliseconds: 500), () => productGroup);
+      return Future.delayed(
+          const Duration(milliseconds: 500), () => productGroup);
     } else {
       return productGroup;
     }
@@ -80,6 +81,11 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
 
   @override
   Widget build(BuildContext context) {
+    void updateProductGroups() {
+      productGroup.length;
+      setState(() {});
+    }
+
     return Scaffold(
       appBar: AppBarTitleWidget(
         title: S.of(context).appbar_title_WS,
@@ -88,14 +94,14 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Padding(
-            padding:const EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               vertical: 24.0,
               horizontal: 20.0,
             ),
             child: Text(
               S.of(context).catalog_title,
-              style:Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
           Expanded(
@@ -109,23 +115,33 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
                     if (snapshot.data == null) {
                       return const Center(child: CircularProgressIndicator());
                     } else {
-                      return GridView.builder(
-                          itemCount: snapshot.data!.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 20.0,
-                          ),
-                          itemBuilder: (context, index) {
-                            return ProductGroupWidget(
-                              productGroup: snapshot.data![index],
-                              press: () => Navigator.pushNamed(
-                                  context, '/catalog',
-                                  arguments: CatalogScreen(
-                                      productGroup:
-                                          snapshot.data!.elementAt(index))),
-                            );
-                          });
+                      return RefreshIndicator(
+                        color: Colors.white,
+                        backgroundColor: const Color(0xFF0C40A6),
+                        onRefresh: () async {
+                          await Future.delayed(
+                            const Duration(seconds: 1),
+                          );
+                          updateProductGroups();
+                        },
+                        child: GridView.builder(
+                            itemCount: snapshot.data!.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 20.0,
+                            ),
+                            itemBuilder: (context, index) {
+                              return ProductGroupWidget(
+                                productGroup: snapshot.data![index],
+                                press: () => Navigator.pushNamed(
+                                    context, '/catalog',
+                                    arguments: CatalogScreen(
+                                        productGroup:
+                                            snapshot.data!.elementAt(index))),
+                              );
+                            }),
+                      );
                     }
                   }),
             ),

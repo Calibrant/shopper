@@ -29,6 +29,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 20.0),
             PurchaseHistory(profile: user, cart: cart),
             const SizedBox(height: 20.0),
+            
           ],
         ),
       ),
@@ -49,6 +50,7 @@ class PurchaseHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    cart.listArray = [...cart.cloneItemsIds.toList()];
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0), color: Colors.grey[200]),
@@ -58,30 +60,30 @@ class PurchaseHistory extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: cart.cloneItemsIds.isEmpty
-                    ?  Text('${S.of(context).order_title} №0',
+                child: cart.listArray.isEmpty
+                    ?  Text('${S.of(context).order_title}0',
                         style: CustomTextStyle.profileOfTextStyle)
-                    : Text('${S.of(context).order_title} №${cart.orderNumber(cart.cloneItemsIds)}',
+                    : Text('${S.of(context).order_title}${cart.orderNumber(cart.listArray)}',//! //
                         style: CustomTextStyle.profileOfTextStyle),
               ),
-              Text('${cart.totalPrice(cart.cloneItemsIds)} ₽',
+              Text('${cart.totalPrice(cart.listArray)} ₽',//! //
                   style: Theme.of(context).textTheme.bodyText1),
             ],
           ),
           ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: cart.cloneItemsIds.length,
+              itemCount: cart.listArray.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Row(
                     children: [
                       Expanded(
-                        child: Text(cart.cloneItemsIds[index].name,
+                        child: Text(cart.listArray[index].name,
                             style: Theme.of(context).textTheme.subtitle1),
                       ),
-                      Text('${cart.cloneItemsIds[index].price}₽',
+                      Text('${cart.listArray[index].price}₽',
                           style: Theme.of(context).textTheme.subtitle1),
                     ],
                   ),

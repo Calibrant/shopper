@@ -35,6 +35,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Неверный адрес электронной почты"),
         "logo_title":
             MessageLookupByLibrary.simpleMessage("Сделай жизнь проще"),
+            "order_title": MessageLookupByLibrary.simpleMessage("Заказ №"),
+        "purchasing_history_title":
+            MessageLookupByLibrary.simpleMessage("История покупок"),
         "total_title": MessageLookupByLibrary.simpleMessage("Итого")
       };
 }
