@@ -18,6 +18,3 @@ A few resources to get you started if this is your first Flutter project:
 ![Android Emulator - Pixel_2_API_28_5554 2022-07-28 31](https://user-images.githubusercontent.com/17889011/181490057-727ae37a-dcc2-479f-a5d2-d145ffc31673.png)
 ![Android Emulator - Pixel_2_API_28_5554 2022-07-28 32](https://user-images.githubusercontent.com/17889011/181490065-cd135c47-afab-4d2a-9bcc-95a4c152a94e.png)
 
-
-https://user-images.githubusercontent.com/17889011/182880958-0cf4bf13-580b-420b-9395-1e30e6e71bab.mp4
-
